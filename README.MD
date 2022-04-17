@@ -7,17 +7,20 @@
 
     Go to Gradle - open api tools - run openApiGenerate
 
+###  2. Start application
 
-###  2. Run tests:
+    ./gradlew test
 
 
+###  3. Run tests:
 
-### 3. Search and kill process
+    ./gradlew bootRun
+
+### 4. Search and kill process
 Search and kill process running on 8080 port:
 For ID 1 it will return you a simple object:
 
-    lsof -t -i tcp:8080 | xargs kill
-
+    lsof -t -i tcp:8080 | xargs kill**
 
 
 ### Troubleshooting
