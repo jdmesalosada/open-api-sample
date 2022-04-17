@@ -33,9 +33,10 @@ jobs:
       with:
         arguments: build
     - name: Karate DSL Test Reports
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       if: ${{ always() }}
       with:
         name: Test Reports
         path: |
           ./build/karate-reports/
+        retention-days: 5
