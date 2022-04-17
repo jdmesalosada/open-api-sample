@@ -29,12 +29,12 @@ paths:
               valid:
                 summary: Valid login
                 value:
-                  billId: 334-098-XF
+                  billId: 00012345
                   pass: 123Valid
               invalid:
                 summary: Invalid login
                 value:
-                  billId: 334-098-XF
+                  billId: 00012345
                   pass: 123NoValid
               requiredBillId:
                 summary: Required Bill Id
@@ -43,16 +43,16 @@ paths:
               requiredPass:
                 summary: Required Pass
                 value:
-                  billId: 334-098-XF
+                  billId: 00012345
               invalidBillId:
                 summary: Invalid BillId
                 value:
-                  billId: 334-08-XF
+                  billId: 000123
                   pass: 123NoValid
               invalidPass:
                 summary: Invalid Pass
                 value:
-                  billId: 334-048-XF
+                  billId: 00012345
                   pass: X123NoValid
               error:
                 summary: User error
