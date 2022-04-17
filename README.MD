@@ -21,6 +21,7 @@ Search and kill process running on 8080 port:
 For ID 1 it will return you a simple object:
 
     lsof -t -i tcp:8080 | xargs kill**
+    lsof -i :8080
 
 
 ### CI/CD
