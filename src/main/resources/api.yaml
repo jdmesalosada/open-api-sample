@@ -1,0 +1,150 @@
+openapi: 3.0.1
+info:
+  title: HomeEnergyAPI
+  version: v1.0.0
+  description: Handle home energy operations
+  termsOfService: 'http://terms-of-service.com'
+  license:
+    name: GNU GPL
+    url: 'https://license.com'
+servers:
+  - url: http://localhost:8080/home-energy/
+  - url: http://home-energy.mocklab.io/
+tags:
+  - name: Authentication
+    description: Login authentication methods
+paths:
+  /authentication/login:
+    post:
+      tags:
+        - Authentication
+      description: Authenticathe user with credentials
+      operationId: authenticateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+            examples: 
+              valid:
+                summary: Valid login
+                value:
+                  billId: 334-098-XF
+                  pass: 123Valid
+              invalid:
+                summary: Invalid login
+                value:
+                  billId: 334-098-XF
+                  pass: 123NoValid
+              requiredBillId:
+                summary: Required Bill Id
+                value:
+                  pass: 123Valid
+              requiredPass:
+                summary: Required Pass
+                value:
+                  billId: 334-098-XF
+              invalidBillId:
+                summary: Invalid BillId
+                value:
+                  billId: 334-08-XF
+                  pass: 123NoValid
+              invalidPass:
+                summary: Invalid Pass
+                value:
+                  billId: 334-048-XF
+                  pass: X123NoValid
+              error:
+                summary: User error
+                value:
+                  billId: 000-000-EX
+                  pass: 123Exxc
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              example: 
+                id: "52d49e8f-3ffa-48df-b463-5df86054740d"
+                name: Julian Mesa
+                customerSince: '2020-02-08'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                billIdReq:
+                  summary: Required BillId
+                  value:
+                    - codigo: 'REQ'
+                      valor: 'Required bill id'
+                passReq:
+                  summary: Password required
+                  value:
+                    - codigo: 'REQ'
+                      valor: 'Password required'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                billIdReq:
+                  summary: Invalid BillId
+                  value:
+                    - codigo: 'INV_BILL_ID'
+                      valor: 'Invalid format bill id must start with 000 and the number lenght after that should be five digits: 00012345'
+                passReq:
+                  summary: Invalid Password
+                  value:
+                    - codigo: 'INV_PASSWORD'
+                      valor: 'Password must start with a number'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+              example: 
+                - codigo: 'ERR'
+                  valor: 'Sistema no disponible'
+components:
+  schemas:
+    Credentials:
+      type: object
+      properties:
+        billId:
+          type: string
+        pass:
+          type: string
+    User:
+      type: object
+      properties:
+        id: 
+          type: string
+          description: User UUID identification
+        name: 
+          type: string
+        customerSince: 
+          type: string
+          format: date
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        value:
+          type: string
+
+        
+        
