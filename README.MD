@@ -2,6 +2,8 @@
 ###  Pre-requisites
 * Java 16.0.1
 * Gradlew version: 7.3.2
+* Intellij
+* Cucumber for java - Plugin instalado en Intellij
 
 ###  1. Run Open API
 
